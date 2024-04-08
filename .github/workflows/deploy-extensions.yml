@@ -1,6 +1,8 @@
 name: Deploy app
 on:
   push:
+    paths:
+      - extensions/**
     branches:
       - main
 jobs:
