@@ -6,7 +6,7 @@ on:
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: self-hosted #ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v3
@@ -17,9 +17,7 @@ jobs:
         run: npm install
       - name: Deploy
         env:
-          # Token from the Partner Dashboard
           SHOPIFY_CLI_PARTNERS_TOKEN: ${{ secrets.SHOPIFY_CLI_PARTNERS_TOKEN }}
           COMMIT_URL: ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
-          # .env content after a deploy
           SHOPIFY_API_KEY: 77b473f6df3b2c2a3624cdafd02d9099
         run: npm run deploy -- -f --source-control-url "$COMMIT_URL"
